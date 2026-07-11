@@ -1,0 +1,15 @@
+document.querySelector('#inquiry-form').addEventListener('submit',event=>{event.preventDefault();const status=document.querySelector('.form-status');status.textContent='Thank you — please connect with Satish on LinkedIn to continue the conversation.';event.target.reset();});
+const intro=document.querySelector('.intro'),loadNumber=document.querySelector('.load-count em');
+let value=0;requestAnimationFrame(()=>intro.classList.add('is-loading'));
+const loading=setInterval(()=>{value=Math.min(100,value+Math.ceil((100-value)/8));loadNumber.textContent=String(value).padStart(2,'0');if(value===100){clearInterval(loading);setTimeout(()=>intro.classList.add('is-leaving'),260);setTimeout(()=>intro.remove(),1040)}},115);
+const heroCopy=document.querySelector('.hero-copy');
+heroCopy.querySelector('.overline').textContent='Available for work';
+heroCopy.querySelector('.overline').classList.add('availability-badge');
+heroCopy.querySelector('h1').innerHTML='UI/UX<br>Designer.';
+heroCopy.querySelector('p:not(.overline)').textContent='Hi, I’m Satish Kumar, a UI/UX designer from Andhra Pradesh. I create clear, accessible digital experiences through research, interaction design and thoughtful visual systems.';
+heroCopy.querySelector('.primary-button').innerHTML='See my work <span>↓</span>';
+heroCopy.querySelector('.primary-button').insertAdjacentHTML('afterend','<a class="secondary-button" href="#contact">Contact me <span>→</span></a><div class="tool-pills"><span>Research</span><span>Figma</span><span>Prototyping</span><span>UI Design</span></div>');
+const scrollBlurItems=document.querySelectorAll('.hero-photo,.about,.projects header,.gallery-card,.capabilities,.contact-form,.contact-copy,footer');
+scrollBlurItems.forEach(item=>item.classList.add('scroll-blur'));
+const blurObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{entry.target.classList.toggle('is-sharp',entry.isIntersecting)}),{threshold:.18});
+scrollBlurItems.forEach(item=>blurObserver.observe(item));
